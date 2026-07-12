@@ -1,139 +1,120 @@
+# Hey there! 👋 I'm C Dhanush Goud
 
-# 🛡️ Custom Layer 2-4 Network Packet Sniffer
-
-![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)
-![Platform](https://img.shields.io/badge/Platform-Linux%20%2F%20Ubuntu-orange.svg)
-![Focus](https://img.shields.io/badge/Focus-Network%20Security%20%2F%20DPI-brightgreen.svg)
-![Status](https://img.shields.io/badge/Status-Completed-success.svg)
-
-A low-level network diagnostic and **Deep Packet Inspection (DPI)** tool built from scratch using Python's native `socket` and `struct` modules. 
-
-Unlike standard automated scripts that rely on high-level libraries (like Scapy), this project bypasses pre-built abstractions to directly interact with Linux network interface cards (`NIC`). It manually unpacks raw binary byte streams to demonstrate real-time data **de-encapsulation across the OSI Model layers**.
+Welcome to my GitHub profile! I am a Computer Science & Engineering undergraduate specializing in **Cyber Security** at JNTU Hyderabad (JNTUH). This is my space to showcase my work bridging full-stack software development with low-level network engineering, protocol analysis, and ethical hacking.
 
 ---
 
-## 🏗️ Architecture & Protocol De-encapsulation Flow
+## 🚀 About Me
 
-The sniffer intercepts raw binary frames from the wire and systematically peels back protocol headers from the Data Link layer up to the Application layer:
+I am a passionate security engineering student and full-stack developer with a deep fascination for understanding how systems operate at the bare-metal level. My expertise spans from crafting resilient web applications to building sophisticated security tools and diagnostic systems from scratch using native system languages. I thrive on solving complex security challenges, automating mundane tasks with AI, and contributing to the open-source security community.
 
-```text
-[ Raw Network Wire ]
-       │
-       ▼
-┌──────────────────────────────────────────────┐
-│ Layer 2: Data Link (Ethernet Frame)          │ ──> Extracts Source/Dest MAC Addresses & Protocol ID
-└──────────────────────────────────────────────┘
-       │ (If Protocol == 0x0800 / IPv4)
-       ▼
-┌──────────────────────────────────────────────┐
-│ Layer 3: Network (IPv4 Header)               │ ──> Extracts Source/Dest IP Addresses & Time-To-Live (TTL)
-└──────────────────────────────────────────────┘
-       │ (If Protocol == 6 / TCP)
-       ▼
-┌──────────────────────────────────────────────┐
-│ Layer 4: Transport (TCP Header)              │ ──> Extracts Source/Dest Port Numbers (Identifies Port 80 HTTP)
-└──────────────────────────────────────────────┘
-       │
-       ▼
-┌──────────────────────────────────────────────┐
-│ Layer 7: Application (Raw Payload)           │ ──> Runs Regex DPI Engine to hunt for plaintext credentials
-└──────────────────────────────────────────────┘
+Rather than relying on pre-built GUI tools, I prefer to engineer custom security solutions, exploit scanners, and penetration testing frameworks that provide granular control and deeper insights. I believe in continuous learning, ethical hacking practices, and sharing knowledge to strengthen the cybersecurity ecosystem.
 
-```
+- 🛡️ Specializing in Network Security, Deep Packet Inspection (DPI), Application Security (AppSec), and Ethical Hacking
+- 💻 Full-stack web developer with expertise in modern frameworks and scalable architectures
+- 🤖 Building AI-powered automation tools for security diagnostics and intelligent threat detection
+- ⚡ Actively practicing competitive programming and algorithmic optimization in C++
+- 🌱 Open to open-source collaboration, security research, hackathons, and mentoring opportunities
 
 ---
 
-## 🚀 Key Features
+## 💻 Skills & Technologies
 
-* **Raw Socket Binding:** Hooks directly into the Linux kernel network stack using `AF_PACKET` sockets, operating in promiscuous mode to capture ambient wire traffic.
-* **Low-Level Binary Parsing:** Utilizes Python's `struct` module to unpack network byte order (Big-Endian) binary streams into readable data types.
-* **Deep Packet Inspection (DPI):** Features an automated regular expression hunting engine that scans HTTP payloads in real-time for sensitive unencrypted authentication parameters (e.g., `username`, `password`, `login`, `bearer`).
-* **Automated Evidence Logging:** Immediately flags suspicious payloads in the terminal and logs raw capture strings to a local file (`suspicious_traffic.log`) for forensic review.
+### Cybersecurity & Network Engineering
+![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![Linux](https://img.shields.io/badge/-Linux-FCC624?style=flat-square&logo=linux&logoColor=black)
+![Wireshark](https://img.shields.io/badge/-Wireshark-1679A7?style=flat-square&logo=wireshark&logoColor=white)
+![Nmap](https://img.shields.io/badge/-Nmap-008080?style=flat-square&logo=nmap&logoColor=white)
+![Burp Suite](https://img.shields.io/badge/-Burp%20Suite-FF6633?style=flat-square&logo=burpsuite&logoColor=white)
+![Bash](https://img.shields.io/badge/-Bash-4EAA25?style=flat-square&logo=gnu-bash&logoColor=white)
 
----
+### Languages
+![C](https://img.shields.io/badge/-C-A8B9CC?style=flat-square&logo=c&logoColor=white)
+![C++](https://img.shields.io/badge/-C++-00599C?style=flat-square&logo=c%2B%2B&logoColor=white)
+![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Java](https://img.shields.io/badge/-Java-007396?style=flat-square&logo=java&logoColor=white)
 
-## 🛠️ Tech Stack & Tools
+### Full-Stack Web & Databases
+![HTML5](https://img.shields.io/badge/-HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/-CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
+![Node.js](https://img.shields.io/badge/-Node.js-339933?style=flat-square&logo=node.js&logoColor=white)
+![MongoDB](https://img.shields.io/badge/-MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)
 
-| Category | Technology / Tool | Purpose |
-| --- | --- | --- |
-| **Language** | Python 3 | Core script logic and socket programming |
-| **System Libraries** | `socket`, `struct`, `re`, `sys` | Raw network access and binary data unpacking |
-| **Environment** | Ubuntu Linux / POSIX | Requires Linux kernel packet-level access |
-| **Verification Tools** | Wireshark, `curl`, `tcpdump` | Lab simulation and packet validation |
-
----
-
-## 📖 Key Concepts Mastered
-
-1. **The OSI Encapsulation Model:** Hands-on experience mapping theoretical network layers to real-world byte structures.
-2. **Network Byte Order (Endianness):** Managing the conversion between system hardware memory (Little-Endian) and network transmission standards (Big-Endian) using strict formatting tokens (`!`).
-3. **Offensive & Defensive Awareness:** Practical demonstration of how unencrypted legacy protocols (HTTP) expose system infrastructure to Man-in-the-Middle (MitM) credential sniffing, reinforcing the critical need for uniform TLS/HTTPS enforcement.
-
----
-
-## 🚦 Installation & Lab Usage
-
-> **⚠️ Legal & Ethical Disclaimer:** This tool is intended for educational purposes, defensive system understanding, and authorized security research only. Do not run this tool on networks or systems you do not personally own or have explicit, documented permission to audit.
-
-### Prerequisites
-
-* A Linux-based operating system (Ubuntu/Debian recommended).
-* Root / Administrative privileges (required to open raw network sockets).
-
-### 1. Clone the Repository
-
-```bash
-git clone [https://github.com/Dhanush-7386/network-packet-sniffer.git](https://github.com/Dhanush-7386/network-packet-sniffer.git)
-cd network-packet-sniffer
-
-```
-
-### 2. Start the Packet Sniffer
-
-Launch the tool with administrative privileges so it can bind to the network interface card:
-
-```bash
-sudo python3 sniffer.py
-
-```
-
-### 3. Simulate an Unencrypted Login Attack (In a Separate Terminal)
-
-Open a second terminal window and use `curl` to send simulated POST credentials over unencrypted HTTP:
-
-```bash
-curl -X POST [http://httpbin.org/post](http://httpbin.org/post) -d "username=admin&password=SuperSecretPassword123"
-
-```
-
-### 4. Expected Terminal Output
-
-Upon intercepting the packet, the DPI engine will fire and output the captured credentials:
-
-```text
-[*] Initializing Raw Socket Sniffer...
-[*] Listening for traffic on all network interfaces...
-[*] Press Ctrl+C to stop the capture.
-============================================================
-[TCP] 192.168.1.15:54321 -> 50.17.200.1:80 | TTL: 64 | Payload: 215 bytes
-
-!!!!!!!!!!!!!!!!!!!! SENSITIVE DATA DETECTED !!!!!!!!!!!!!!!!!!!!
-POST /post HTTP/1.1
-Host: httpbin.org
-User-Agent: curl/7.88.1
-Accept: */*
-Content-Length: 48
-Content-Type: application/x-www-form-urlencoded
-
-username=admin&password=SuperSecretPassword123
-============================================================
-
-```
+### Tools & Platforms
+![Git](https://img.shields.io/badge/-Git-F05032?style=flat-square&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white)
+![Docker](https://img.shields.io/badge/-Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+![Ubuntu](https://img.shields.io/badge/-Ubuntu-E95420?style=flat-square&logo=ubuntu&logoColor=white)
 
 ---
 
-## 🔒 Security Notice
+## 📊 GitHub Stats
 
-To prevent accidental data leakage, ensure that `*.log` files are ignored by your version control system. A `.gitignore` file is included in this repository by default.
+![Dhanush's GitHub stats](https://github-readme-stats.vercel.app/api?username=Dhanush-7386&show_icons=true&theme=radical)
 
-```
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=Dhanush-7386&layout=compact&theme=radical)
+
+---
+
+## 🎯 Featured Projects
+
+Here are some of my notable engineering projects:
+
+- **[Layer 2–4 Network Packet Sniffer](https://github.com/Dhanush-7386/network-packet-sniffer)** - A low-level network diagnostic and Deep Packet Inspection (DPI) tool engineered from scratch in native Python (`socket`, `struct`, `re`) to de-encapsulate OSI headers and flag unencrypted HTTP credentials in real time.
+
+- **[Blood Bridge](https://github.com/Dhanush-7386/Blood-Bridge)** - A TypeScript-based full-stack healthcare web application for managing blood donation networks and connecting donors with recipients efficiently.
+
+- **[E-Commerce Web App](https://github.com/Dhanush-7386/E-Commerce-web-App)** - A scalable, multi-category e-commerce platform engineered with TypeScript, featuring dynamic UI rendering, inventory management, and a robust backend.
+
+- **[Jarvis AI](https://github.com/Dhanush-7386/Jarvis-Ai)** - A Python-based desktop automation and voice assistant tool designed to execute system diagnostics, manage workflows, and interact via speech recognition.
+
+- **[Real-time Communication App](https://github.com/Dhanush-7386/CodeAlpha_realtime_communication_App)** - A JavaScript-powered real-time communication platform enabling instant messaging and collaborative workflows.
+
+- **[Protect My Parade (NASA Space Apps Challenge)](https://github.com/gadiparthirohith1505-coder/PROTECT-MY-PARADE)** - A weather prediction and Earth observation web application developed for the NASA Space Apps Challenge utilizing predictive environmental data.
+
+---
+
+## 🏆 Achievements & Simulation Experience
+
+- 🪐 **NASA Space Apps Challenge:** Competed in developing software utilizing NASA Earth observation data for environmental predictive modeling.
+- 🚀 **JPD Hub Hackathon (Advitiya'26):** Collaborated on rapid prototyping and full-stack system development under competitive time constraints.
+- 🔒 **Tata Cybersecurity Job Simulation:** Completed industry-grade simulation tasks focusing on identity access management, threat profiling, and defensive security frameworks.
+
+---
+
+## 🌐 Connect With Me
+
+Feel free to reach out and connect!
+
+[![LinkedIn](https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dhanush-goud-chagapuram-86043b311)
+[![GitHub](https://img.shields.io/badge/-GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/Dhanush-7386)
+[![Email](https://img.shields.io/badge/-Email-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:dhanushchag@gmail.com)
+
+---
+
+## 📈 Current Focus
+
+- 🤖 **Learning & Building AI Automations** - Developing intelligent automation tools for security diagnostics, threat detection, and system optimization
+- 🛡️ **Cybersecurity Projects** - Engineering advanced security tools, vulnerability scanners, and network analysis frameworks
+- 🎯 **Ethical Hacking** - Practicing penetration testing, exploit development, and defensive security techniques
+- 📚 **Systems Programming** - Mastering low-level systems programming and competitive algorithms in C++
+- 🌟 **Security Research** - Contributing to open-source security initiatives and advancing network engineering research
+
+---
+
+## 💬 Fun Facts
+
+- ☕ Powered by Linux terminals, coffee, and curiosity
+- 🔍 I prefer reading raw packet hex dumps over high-level abstracted logs
+- 🎮 Enjoy technical problem-solving and competitive hackathons
+
+---
+
+## ⭐ Support
+
+If you find my security tools and open-source projects helpful, please consider giving them a ⭐!
+
+---
+
+*Last updated: July 2026*
